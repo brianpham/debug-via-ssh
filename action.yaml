@@ -107,46 +107,46 @@ runs:
     - name: Start ngrok
       run: >-
         printf "# Starting ngrok..."
-        ./ngrok tcp 22 --log ".ngrok.log" --region "${{ inputs.NGROK_REGION }}" &
+          ./ngrok tcp 22 --log ".ngrok.log" --region "us" &
         printf " [DONE]\n\n"
 
-        printf "# Waiting for '.ngrok.log' file to be properly generated..."
-        while ! grep -osqE "tcp://(.+)" .ngrok.log;do
-        sleep 1
-        if grep -sq "command failed" .ngrok.log
-        then
-        exit 1
-        fi
-        done
-        printf " [DONE]\n\n"
+        # printf "# Waiting for '.ngrok.log' file to be properly generated..."
+        #   while ! grep -osqE "tcp://(.+)" .ngrok.log;do
+        #     sleep 1
+        #     if grep -sq "command failed" .ngrok.log
+        #     then
+        #       exit 1
+        #     fi
+        #   done
+        # printf " [DONE]\n\n"
 
-        ssh_string=$(grep -oE "tcp://(.+)" .ngrok.log | sed "s/tcp:\/\//ssh $(cat ssh_user)@/" | sed "s/:/ -p /")
-        continue_path=$(eval echo ~$(cat ssh_user)/continue)
-        time=${{ inputs.NGROK_TIMEOUT }}
+        # ssh_string=$(grep -oE "tcp://(.+)" .ngrok.log | sed "s/tcp:\/\//ssh $(cat ssh_user)@/" | sed "s/:/ -p /")
+        # continue_path=$(eval echo ~$(cat ssh_user)/continue)
+        # time=${{ inputs.NGROK_TIMEOUT }}
 
-        while [ ! -e $continue_path ] && [ $time -gt 1 ]
-        do
-        echo ""
-        echo "#################"
-        echo "# Connect to this runner using:"
-        echo "#########################################"
-        echo $ssh_string
-        echo "#########################################"
-        echo "#"
-        echo "# Allow workflow to continue using:"
-        echo "#########################################"
-        echo "bash -c \"touch $continue_path\""
-        echo "#########################################"
-        echo "#"
-        echo "# SSH session time left:"
-        echo "########################################"
-        printf '#%-14s%dh:%02dm:%02ds%-14s#\n' '' $(($time/3600)) $(($time%3600/60)) $(($time%60)) ''
-        echo "########################################"
-        echo ""
-        
-        sleep 10
-        time=$((time-10))
-        done
+        # while [ ! -e $continue_path ] && [ $time -gt 1 ]
+        # do
+        #   echo ""
+        #   echo "#################"
+        #   echo "# Connect to this runner using:"
+        #   echo "#########################################"
+        #   echo $ssh_string
+        #   echo "#########################################"
+        #   echo "#"
+        #   echo "# Allow workflow to continue using:"
+        #   echo "#########################################"
+        #   echo "bash -c \"touch $continue_path\""
+        #   echo "#########################################"
+        #   echo "#"
+        #   echo "# SSH session time left:"
+        #   echo "########################################"
+        #   printf '#%-14s%dh:%02dm:%02ds%-14s#\n' '' $(($time/3600)) $(($time%3600/60)) $(($time%60)) ''
+        #   echo "########################################"
+        #   echo ""
+          
+        #   sleep 10
+        #   time=$((time-10))
+        # done
 
-        echo "# SSH session terminated. Allowing workflow to continue..."
+        # echo "# SSH session terminated. Allowing workflow to continue..."
       shell: bash
