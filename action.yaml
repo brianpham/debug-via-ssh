@@ -103,7 +103,7 @@ runs:
 
         echo "# Set ngrok with the given authentification token"
           ./ngrok authtoken ${{ inputs.NGROK_AUTH_TOKEN }}
-      shell: bash
+      shell: pwsh
 
     - name: Start ngrok
       run: |
