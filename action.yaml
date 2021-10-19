@@ -33,7 +33,7 @@ runs:
     #       echo "NGROK_AUTH_TOKEN needs to be passed in the 'with' field."
     #       exit 1
     #     fi
-    #   shell: sh
+    #   shell: bash
     - name: Meet OS specific prerequisites
       run: |
         if('${{ runner.os }}' -eq 'Linux')
@@ -92,6 +92,9 @@ runs:
         }
       shell: pwsh
 
+    - run: echo $SHELL
+      shell: bash
+
     - name: Install and setup ngrok
       run: |
         echo "# Install ngrok"
@@ -101,7 +104,7 @@ runs:
 
         echo "# Set ngrok with the given authentification token"
           ./ngrok authtoken ${{ inputs.NGROK_AUTH_TOKEN }}
-      shell: sh
+      shell: bash
 
     - name: Start ngrok
       run: |
