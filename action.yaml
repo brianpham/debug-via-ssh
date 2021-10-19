@@ -105,7 +105,7 @@ runs:
       shell: pwsh
 
     - name: Start ngrok
-      run: |
+      run: >-
         printf "# Starting ngrok..."
           ./ngrok tcp 22 --log ".ngrok.log" --region "${{ inputs.NGROK_REGION }}" &
         printf " [DONE]\n\n"
@@ -149,4 +149,4 @@ runs:
         done
 
         echo "# SSH session terminated. Allowing workflow to continue..."
-      shell: pwsh
+      shell: bash
