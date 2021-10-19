@@ -107,6 +107,10 @@ runs:
     - name: Start ngrok
       run: >-
         printf "# Starting ngrok..."
-        ./ngrok tcp 22 --log ".ngrok.log" --region 'us' & printf " [DONE]\n\n"
+        ./ngrok tcp 22 --log ".ngrok.log" --region "us" & printf " [DONE]\n\n"
+
+
+        printf "# Waiting for '.ngrok.log' file to be properly generated..."
+
 
       shell: bash
