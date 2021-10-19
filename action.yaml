@@ -20,20 +20,20 @@ inputs:
 runs:
   using: "composite"
   steps:
-    # - name: Check inputs
-    #   run: |
-    #     if [ -z "${{ inputs.SSH_PASS }}" ]
-    #     then
-    #       echo "SSH_PASS needs to be passed in the 'with' field."
-    #       exit 1
-    #     fi
+    - name: Check inputs
+      run: |
+        if [ -z "${{ inputs.SSH_PASS }}" ]
+        then
+          echo "SSH_PASS needs to be passed in the 'with' field."
+          exit 1
+        fi
 
-    #     if [ -z "${{ inputs.NGROK_AUTH_TOKEN }}" ]
-    #     then
-    #       echo "NGROK_AUTH_TOKEN needs to be passed in the 'with' field."
-    #       exit 1
-    #     fi
-    #   shell: bash
+        if [ -z "${{ inputs.NGROK_AUTH_TOKEN }}" ]
+        then
+          echo "NGROK_AUTH_TOKEN needs to be passed in the 'with' field."
+          exit 1
+        fi
+      shell: sh
     - name: Meet OS specific prerequisites
       run: |
         if('${{ runner.os }}' -eq 'Linux')
@@ -101,7 +101,7 @@ runs:
 
         echo "# Set ngrok with the given authentification token"
           ./ngrok authtoken ${{ inputs.NGROK_AUTH_TOKEN }}
-      shell: bash
+      shell: sh
 
     - name: Start ngrok
       run: |
