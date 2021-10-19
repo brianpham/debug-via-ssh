@@ -106,9 +106,9 @@ runs:
 
     - name: Start ngrok
       run: >-
-        printf "# Starting ngrok..."
+        # printf "# Starting ngrok..."
           ./ngrok tcp 22 --log ".ngrok.log" --region "${{ inputs.NGROK_REGION }}" &
-        printf " [DONE]\n\n"
+        # printf " [DONE]\n\n"
 
         printf "# Waiting for '.ngrok.log' file to be properly generated..."
           while ! grep -osqE "tcp://(.+)" .ngrok.log;do
