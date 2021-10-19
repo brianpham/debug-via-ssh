@@ -109,4 +109,11 @@ runs:
         printf "# Starting ngrok..."
         ./ngrok tcp 22 --log ".ngrok.log" --region "us" & printf " [DONE]\n\n"
         printf "# Waiting for '.ngrok.log' file to be properly generated..."
+          while ! grep -osqE "tcp://(.+)" .ngrok.log;do
+            sleep 1
+            if grep -sq "command failed" .ngrok.log
+            then
+              exit 1
+            fi
+          done
       shell: bash
