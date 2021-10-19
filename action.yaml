@@ -96,7 +96,7 @@ runs:
       run: |
         echo "# Install ngrok"
           echo $SHELL
-          which curl
+          curl google.com
           curl https://bin.equinox.io/c/4VmDzA7iaHb/$(cat ngrok_zip_name) --output ngrok.zip
           unzip ngrok.zip
           chmod +x ./ngrok
