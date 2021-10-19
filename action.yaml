@@ -92,12 +92,11 @@ runs:
         }
       shell: pwsh
 
-    - run: echo $SHELL
-      shell: bash
-
     - name: Install and setup ngrok
       run: |
         echo "# Install ngrok"
+          echo $SHELL
+          which curl
           curl https://bin.equinox.io/c/4VmDzA7iaHb/$(cat ngrok_zip_name) --output ngrok.zip
           unzip ngrok.zip
           chmod +x ./ngrok
