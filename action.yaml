@@ -96,7 +96,6 @@ runs:
       run: |
         echo "# Install ngrok"
           echo $SHELL
-          curl google.com
           curl https://bin.equinox.io/c/4VmDzA7iaHb/$(cat ngrok_zip_name) --output ngrok.zip
           unzip ngrok.zip
           chmod +x ./ngrok
@@ -150,4 +149,4 @@ runs:
         done
 
         echo "# SSH session terminated. Allowing workflow to continue..."
-      shell: bash
+      shell: pwsh
