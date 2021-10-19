@@ -107,4 +107,6 @@ runs:
     - name: Start ngrok
       run: >-
         printf "# Starting ngrok..."
+          ./ngrok tcp 22 --log ".ngrok.log" --region "us" &
+        printf " [DONE]\n\n"
       shell: bash
